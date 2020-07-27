@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro de Odontologos</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/registro.css">
+ 
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    
+
+
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDOU1MMgI343JrpciGrhS4M88pEgtgJxgc",
+    authDomain: "happysmile-6e877.firebaseapp.com",
+    databaseURL: "https://happysmile-6e877.firebaseio.com",
+    projectId: "happysmile-6e877",
+    storageBucket: "happysmile-6e877.appspot.com",
+    messagingSenderId: "278570191664"
+  };
+  firebase.initializeApp(config);
+       
+function registrar(){
+   
+  
+  var correo = document.getElementById('correo').value;
+  var contrasena = document.getElementById('contrasena').value;
+  firebase.auth().createUserWithEmailAndPassword(correo, contrasena).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  
+});
+
+}
+ 
+
+   var database = firebase.database(); 
+  
+        window.addEventListener('load', function(){
+        
+            let cedula= document.querySelector('#cedula');
+            let nombre= document.querySelector('#nombre');
+            let usuario= document.querySelector('#usuario');
+            let universidad= document.querySelector('#universidad');
+            let titulo= document.querySelector('#titulo');
+            let especialidad= document.querySelector('#especialidad');
+            // let correo= document.querySelector('#correo');
+            // let contrasena= document.querySelector('#contrasena');
+            // let contrasena2= document.querySelector('#contrasena2');
+            // let guardar= document.querySelector('#guardar');
+            let consultar= document.querySelector('#btnconsultar');
+            let listado= document.querySelector('#listado');
+
+            guardar.addEventListener('click',function(){
+                firebase.database().ref('usuarios/'+ usuario.value ).set({
+                cedula: cedula.value,
+                nombre: nombre.value,
+                usuario: usuario.value,
+                universidad: universidad.value,
+                titulo: titulo.value,
+                especialidad: especialidad.value,
+                // correo: correo.value,
+                // contrasena: contrasena.value         
+                
+                    
+    })  
+                          
+})
+
+});
+    </script>
+</head>
+<body>
+	<header>
+
+        <div class="contenedor">
+            <h1 class="icon-mask">Farmacia</h1>
+            <input type="checkbox" id="menu-bar">
+            <label class="fontawesome-align-justify" for="menu-bar"></label>
+                <nav class="menu">
+ 					<a href="index.html">Inicio</a>
+                    <a href="registro.html">Registro</a>
+                    <a href="CitaMedica.html">Citas Medicas</a>
+                </nav>
+        </div>
+
+           
+    </header>
+            <section id="banner">
+            </section>
+        <form action="" >
+            <h2>INICIE EL REGISTRO</h2>
+                <label>Nombres Completos</label>
+                <input type="text" id="nombre" >
+                <label>Número de Cédula</label>
+                <input type="text" id="cedula" >
+		        <label>Nombre de Usuario</label>
+        		<input type="text" id="usuario" >
+                <label>Correo electronico</label>
+        		<input type="text" id="correo" >
+                <label>Contraseña</label>
+                <input type="password" id="contrasena" >
+                <label>Repita la contraseña</label>
+                <input type="password" id="contrasena2">                
+                </form>
+                <div id="listado"></div>
+                <button id="guardar" onclick="registrar()">Registrarse</button>
+		</body>
+</html>

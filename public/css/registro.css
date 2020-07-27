@@ -1,0 +1,243 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://weloveiconfonts.com/api/?family=fontawesome|typicons);
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    width: 100%;
+    height: 50px;
+    background: rgba(179, 10, 14, 1);
+    color: #fff;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.contenedor h1{
+    font-family: 'Colonna MT', sans-serif;
+    font-size: 65px;
+}
+.contenedor {
+    width: 98%;
+    margin: auto;
+}
+
+h1 {
+    float: left;
+}
+
+header .contenedor {
+    display: table;
+}
+.copy {
+    font-size: 20px;
+}
+#banner {
+    margin-top: 50px;
+    position: relative;
+    margin-top: 8%;
+}
+
+#banner img {
+    width: 100%;
+    height: 500px;
+}
+
+#banner .contenedor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #fff;
+}
+
+#banner a {
+    display: block;
+    width: 100px;
+    color: #fff;
+    text-decoration: none;
+    padding: 7px;
+    margin-top: 10px;
+    border: 3px solid #fff;
+}
+
+#banner a:hover {
+    background: rgba(51,51,51,0.5);
+}
+@media (min-width:480px) {
+    .info-pet {
+        width: 40%;
+    }
+}
+
+@media (min-width:1024px) {
+    .info-pet {
+        width: auto;
+    }
+}
+#menu-bar {
+    display: none;
+}
+
+header label {
+    float: right;
+    font-size: 28px;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+.menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(119, 0, 14, 1);
+    transition: all 0.5s;
+    transform: translateX(-100%);
+}
+
+.menu a {
+    display: block;
+    color: #fff;
+    height: 50px;
+    text-decoration: none;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.menu a:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+#menu-bar:checked ~ .menu {
+    transform: translateX(0%);
+}
+
+@media (min-width:1024px) {
+.menu {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: translateX(0%);
+    float: right;
+    display: flex;
+}
+    
+.menu a {
+    border: none;
+}
+    
+header label { 
+   display: none;
+}
+}
+form{
+	width: 800px;
+	margin: auto;
+	background: rgba(119, 0, 14, 1);
+	padding: 30px 50px;
+	box-sizing: border-box;
+	margin-top: 20px;
+	border-radius: 10px;
+}
+
+form h2{
+	color: #fff;
+	text-align: center;
+	margin: 0;
+	font-size: 30px;
+	margin-bottom: 20px;
+
+}
+input{
+	width: 100%;
+	margin-bottom: 40px;
+	padding: 7px;
+	box-sizing: border-box;
+	font-size: 17px;
+
+}
+label{
+    color: #fff;
+}
+
+button{
+	background: rgba(119, 0, 14, 1);
+	color: #fff;
+	padding: 15px;
+    width: 10%;
+    margin-left: 42%;
+    border-radius: 10px;
+}
+button:hover{
+		cursor: pointer;
+
+}
+#btnregistrar{
+	background: rgba(119, 0, 14, 1);
+	color: #fff;
+	padding: 15px;
+    width: 20%;
+    margin-left: 42%;
+    border-radius: 10px;
+}
+#btnregistrar:hover{
+		cursor: pointer;
+
+}
+@media (max-width: 480px)
+{
+		form{
+		width: 100%;
+	}
+}
+#select {
+    position: relative;
+    border: 1px solid #ccc;
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+    overflow: hidden;
+    background-color: #fff;
+}
+#btnconsultar{
+    
+    margin-left: 0%;
+    width: 30%;
+    border-radius: 5%;
+    background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	padding: 5px;
+
+}
+#Select-Div{
+    width: 30%;
+    height: 0%;
+    text-align: right;
+    position: absolute; right: 450px; top: 222px;
+    margin-top: 6%;
+    
+}
+#Select{
+
+background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	padding: 9px;
+    width: 100%;
+  position: static;
+  margin-left: 5%;
+  
+}

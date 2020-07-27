@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Perfil</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+   
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+<script>
+     var config = {
+    apiKey: "AIzaSyDOU1MMgI343JrpciGrhS4M88pEgtgJxgc",
+    authDomain: "happysmile-6e877.firebaseapp.com",
+    databaseURL: "https://happysmile-6e877.firebaseio.com",
+    projectId: "happysmile-6e877",
+    storageBucket: "happysmile-6e877.appspot.com",
+    messagingSenderId: "278570191664"
+  };
+  firebase.initializeApp(config)
+  var database = firebase.database();
+  
+  
+  window.addEventListener('load',function(){
+
+
+       
+document.querySelector('#btnconsultar').addEventListener('click',function(){
+            firebase.database().ref('/CitasMedicasClientes').on('value',function(resultado) {
+                html='<table style="margin-left: 10%;" border=2>'
+                resultado.forEach(function(resul) {
+                    html+= `<tr>
+    <th> Nombre del Paciente </th>
+    <th> Cédula </th> 
+    <th> Número de Teléfono </th>
+    <th> Correo Electronico </th>
+    <th> Nombre del Odontologo </th>
+    <th> Fecha de la Cita Medica </th>
+    <th> Motivo de la cita Medica </th>
+  </tr><tr>
+                    <td>${resul.val().nombre} </td>
+                    <td> ${resul.val().cedula}</td> 
+                    <td> ${resul.val().telefono}</td> 
+                    <td> ${resul.val().correo}</td> 
+                    <td> ${resul.val().odontologo}</td> 
+                    <td> ${resul.val().fecha}</td> 
+                    <td> ${resul.val().motivo}</td> 
+                    <td> <button class='accion' value=${resul.val().cedula} >Eliminar</button></td>
+                 
+                    </tr>` 
+                 });      
+                html+='</table>'
+                listado.innerHTML=html
+                document.querySelectorAll('.accion').forEach(elemento=>{
+                    elemento.addEventListener('click',function(){
+                        accion(elemento.innerHTML, elemento.value)
+                    })
+                });
+
+            });
+        });
+        function accion(tipo, valor)
+        {
+            if (tipo=='Eliminar')
+            {
+                firebase.database().ref('/CitasMedicasClientes/'+valor).remove().then(p=>{
+                    alert('Cita Medica Eliminada con Exito')
+                });
+            }
+            else
+            {
+                firebase.database().ref('/CitasMedicasClientes/'+valor).once('value',function(resultadoi){
+                    let objetoRespuesta= resultadoi.val()
+                    nombre.value=objetoRespuesta.nombre;
+                    cedula.value=objetoRespuesta.cedula;
+                    telefono.value=objetoRespuesta.telefono;
+                    correo.value=objetoRespuesta.correo;
+                    odontologo.value=objetoRespuesta.odontologo;
+                    fecha.value=objetoRespuesta.fecha;
+                    motivo.value=objetoRespuesta.motivo;
+                })
+            }
+
+                
+        }
+        
+  
+    });
+</script>
+
+</head>
+<body style="background-color: #9ce0d25e;">
+        <header>
+
+                <div class="contenedor">
+                    <h1 class="icon-mask">Farmacia</h1>
+                    <input type="checkbox" id="menu-bar">
+                    <label class="fontawesome-align-justify" for="menu-bar"></label>
+                        <nav class="menu">
+                             <a href="index.html">Cerrar Sesión</a>
+                             
+                        </nav>
+                </div>
+                
+                        
+            </header>
+            <h1 style="margin-left: 42%; margin-top: 5% ;color: #000; ">¡Bienvenido Usuario!</h1>
+    </div>   
+    
+    <button style="vertical-align:middle;margin-left: 43%; margin-top: 5% ;" id="btnconsultar">CONSULTAR CITAS MEDICAS</button>
+<div style="padding: 25px;"> 
+    
+</div>
+    <div id="listado"></div>
+    
+</body>
+</html>

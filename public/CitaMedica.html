@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Registro</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/registro.css">
+     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+    <script>
+    var config = {
+    apiKey: "AIzaSyDOU1MMgI343JrpciGrhS4M88pEgtgJxgc",
+    authDomain: "happysmile-6e877.firebaseapp.com",
+    databaseURL: "https://happysmile-6e877.firebaseio.com",
+    projectId: "happysmile-6e877",
+    storageBucket: "happysmile-6e877.appspot.com",
+    messagingSenderId: "278570191664"
+  };
+  firebase.initializeApp(config);
+    var database = firebase.database();
+
+
+        window.addEventListener('load', function(){
+            
+            let nombre= document.querySelector('#txtnombre');
+            let odontologo= document.querySelector('#txtOdontologo');            
+            let correo= document.querySelector('#txtcorreo');
+            let cedula= document.querySelector('#txtcedula');
+            let telefono= document.querySelector('#txttelefono');
+            let fecha = document.querySelector('#txtfecha');
+            let motivo= document.querySelector('#txtdescripcion');
+            let guardar= document.querySelector('#btnregistrar');
+            
+
+            guardar.addEventListener('click',function(){
+                firebase.database().ref('CitasMedicasClientes/'+ cedula.value ).set({
+                nombre: nombre.value,
+                odontologo: odontologo.value,
+                correo: correo.value,
+                cedula: cedula.value,
+                telefono: telefono.value,
+                fecha: fecha.value,
+                motivo: motivo.value,
+                
+})
+
+        });
+        
+});
+
+window.addEventListener('load', function(){
+
+    let consultar= document.querySelector('#btnconsultar');
+             let listado= document.querySelector('#listado');
+             document.querySelector('#btnconsultar').addEventListener('click',function(){
+            firebase.database().ref('/usuarios').on('value',function(resultado) {
+                html='<div id="Select-Div"><select name="" id="Select" onchange="Selector();" ><option>Seleccione una opcion </option>'
+                    
+                resultado.forEach(function(resul) {
+                    html+= `<option value="">${resul.val().nombre}</option>`
+
+                });      
+                html+='</select><div>'
+                listado.innerHTML=html
+                document.querySelectorAll('.accion').forEach(elemento=>{
+                    elemento.addEventListener('click',function(){
+                        accion(elemento.innerHTML, elemento.value)
+                    })
+                });
+
+            });
+        }) 
+        
+});
+
+    function Selector(){
+                 
+           var d = document.getElementById("Select");
+       var textoSelect = d.options[d.selectedIndex].text;
+       document.getElementById('txtOdontologo').value = textoSelect;
+       }
+
+
+</script>
+</head>
+<body>
+	<header>
+
+        <div class="contenedor">
+            <h1 class="icon-mask">Farmacia</h1>
+            <input type="checkbox" id="menu-bar">
+            <label class="fontawesome-align-justify" for="menu-bar"></label>
+                <nav class="menu">
+ 					<a href="index.html">Inicio</a>
+                    <a href="registro.html">Registro</a>
+                </nav>
+        </div>
+
+           
+    </header>
+            <section id="banner">
+                
+            </section>
+        <form action="" >
+                <h2>REGISTRE SU CITA</h2>
+		      <label for="txtnombre">Nombres Completos</label>
+                <input type="text"  id="txtnombre">
+                <label for="txtcorreo">Correo Electrónico</label>
+        		<input type="email" id="txtcorreo" >
+                <label for="txtcedula">Numero de Cedula</label>
+        		<input type="text" id="txtcedula">
+                <label for="txttelefono">Numero de Telefono</label>
+                <input type="text" id="txttelefono">
+                <label for="txtfecha">Fecha de la Cita</label>
+        		<input type="txt" id="txtfecha">
+                <label for="txtdescripcion">Motivo de su Cita</label>
+                <input type="txt" id="txtdescripcion">
+        	   <button id="btnregistrar">Registrar</button>
+
+               </div>
+		</body>
+</html>
